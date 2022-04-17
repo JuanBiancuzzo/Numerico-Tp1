@@ -9,7 +9,7 @@ def comparacion_doble(valor1 : float, valor2 : float) -> bool :
 def unidad_de_maquina(base : int, funcion_comparacion) -> int :
     valor = 1
     unidad = 0
-    while not funcion_comparacion(valor, valor/10):
+    while not funcion_comparacion(valor, valor/base):
         valor /= base
         unidad += 1
     return unidad
