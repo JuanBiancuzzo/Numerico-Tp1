@@ -1,26 +1,16 @@
-import numpy
+from UnidadDeMaquina import UnidadDeMaquina, ComparacionSimple, ComparacionDoble
 
-def comparacion_simple(valor1 : float, valor2 : float) -> bool :
-    return numpy.float32(valor1) == numpy.float32(valor2)
+def UnidadDeMaquicaSegunBase(bases):
+    for base in bases:
+        print(f"Con la base {base}, tenemos las unidades de maquina: ")
 
-def comparacion_doble(valor1 : float, valor2 : float) -> bool :
-    return numpy.float64(valor1) == numpy.float64(valor2)
+        unidadSimple = UnidadDeMaquina(base, ComparacionSimple)
+        unidadDoble = UnidadDeMaquina(base, ComparacionDoble)
 
-def unidad_de_maquina(base : int, funcion_comparacion) -> int :
-    division = 1
-    valor = 1 + division
-    unidad = 0
+        print(f"\tSimple: {unidadSimple} \n\tDoble: {unidadDoble}\n")
 
-    while not funcion_comparacion(valor, 1):
-        division /= base
-        valor = 1 + division
-        unidad += 1
-
-    return unidad
-
-def main():
-    unidad = unidad_de_maquina(10, comparacion_simple)
-    print(unidad)
+def Main():
+    UnidadDeMaquicaSegunBase([2, 10])
 
 if __name__ == "__main__":
-    main()
+    Main()
