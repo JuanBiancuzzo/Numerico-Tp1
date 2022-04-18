@@ -1,6 +1,6 @@
 from UnidadDeMaquina import UnidadDeMaquina, ComparacionSimple, ComparacionDoble
 
-def UnidadDeMaquicaSegunBase(bases):
+def UnidadDeMaquicaSegunBases(bases):
     for base in bases:
         print(f"Con la base {base}, tenemos las unidades de maquina: ")
 
@@ -10,7 +10,7 @@ def UnidadDeMaquicaSegunBase(bases):
         print(f"\tSimple: {unidadSimple} \n\tDoble: {unidadDoble}\n")
 
 def Main():
-    UnidadDeMaquicaSegunBase([2, 10])
+    UnidadDeMaquicaSegunBases([2, 10])
 
 if __name__ == "__main__":
     Main()
