@@ -1,4 +1,6 @@
 from UnidadDeMaquina import UnidadDeMaquina, ComparacionSimple, ComparacionDoble
+from Serie import FuncionSerie
+import numpy
 
 def UnidadDeMaquicaSegunBases(bases):
     for base in bases:
@@ -11,6 +13,17 @@ def UnidadDeMaquicaSegunBases(bases):
 
 def Main():
     UnidadDeMaquicaSegunBases([2, 10])
+
+    '''valorPrueba = 1
+    resultados = []
+    for iteracion in range(20):
+        resultado = FuncionSerie(valorPrueba, iteracion)
+        resultados.append(resultado)
+    
+    resultadosNP = numpy.array(resultados)
+    for resultado in resultados:
+        print(resultado)
+    print(resultadosNP)'''
 
 if __name__ == "__main__":
     Main()
