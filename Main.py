@@ -1,4 +1,4 @@
-from UnidadDeMaquina import UnidadDeMaquina, ComparacionSimple, ComparacionDoble
+from UnidadDeMaquina import UnidadDeMaquina
 from Serie import FuncionSerie
 import numpy
 
@@ -7,15 +7,17 @@ padron2 = 106005
 divisor = 10 ** 6
 
 valorPrueba = (padron1 + padron2) / divisor
+precisionesUsadas = [numpy.float32, numpy.float64]
 
-def UnidadDeMaquicaSegunBases(bases):
+def UnidadDeMaquicaSegunBases(bases, precisiones):
     for base in bases:
         print(f"Con la base {base}, tenemos las unidades de maquina: ")
 
-        unidadSimple = UnidadDeMaquina(base, ComparacionSimple)
-        unidadDoble = UnidadDeMaquina(base, ComparacionDoble)
-
-        print(f"\tSimple: {unidadSimple} \n\tDoble: {unidadDoble}\n")
+        for precision in precisiones:
+            unidad = UnidadDeMaquina(base, precision)
+            print(f"\tCon precision {precision.__name__}: {unidad}")
+        
+        print()
 
 def ResultadosSegunPrecisiones(valor : float, iteracion : int, precisiones):
     for precision in precisiones:
@@ -24,9 +26,9 @@ def ResultadosSegunPrecisiones(valor : float, iteracion : int, precisiones):
         print("{0:.55f}\n".format(numpy.float64(resultado)))
 
 def Main():
-    UnidadDeMaquicaSegunBases([2, 10])
+    UnidadDeMaquicaSegunBases([2, 10], precisionesUsadas)
     iteracionesNecesarias = 10 # hacer el calculo de iteraciones
-    ResultadosSegunPrecisiones(valorPrueba, iteracionesNecesarias, [numpy.float32, numpy.float64])    
+    ResultadosSegunPrecisiones(valorPrueba, iteracionesNecesarias, precisionesUsadas)    
 
 if __name__ == "__main__":
     Main()
