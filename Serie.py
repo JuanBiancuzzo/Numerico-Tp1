@@ -14,7 +14,7 @@ def FuncionSerie(valor : float, iteraciones : int, precision) -> float:
         dividendo = precision( signo * ( valor ** ( 2 * iteracion + 1 ) ) )
         divisor = precision( ( 2 ** iteracion ) * factorial(iteracion) * ( 2 * iteracion + 1 ) )
         resultado += precision( dividendo / divisor)
-    return resultado 
+    return precision(resultado)
 
 def CaclularCPExperimental(serieIterable, valor : float, iteraciones : int, precision) -> float:    
     deltaValor = 0.1
