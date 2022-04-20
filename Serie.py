@@ -1,11 +1,4 @@
 from scipy.special import factorial
-import numpy
-
-def Float32(valor : float) -> float:
-    return numpy.float32(valor)
-
-def Float64(valor : float) -> float:
-    return numpy.float64(valor)
 
 def FuncionSerie(valor : float, iteraciones : int, precision) -> float: 
     resultado = 0

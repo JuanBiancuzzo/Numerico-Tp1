@@ -1,5 +1,5 @@
 from UnidadDeMaquina import UnidadDeMaquina, ComparacionSimple, ComparacionDoble
-from Serie import FuncionSerie, Float32, Float64
+from Serie import FuncionSerie
 import numpy
 
 def UnidadDeMaquicaSegunBases(bases):
@@ -16,8 +16,9 @@ def Main():
 
     valorPrueba = (106005 + 105859) / (10 ** 6)
     resultados = []
+
     for iteracion in range(20):
-        resultado = FuncionSerie(valorPrueba, iteracion, Float32)
+        resultado = FuncionSerie(valorPrueba, iteracion, numpy.float32)
         resultados.append(resultado)
     
     for resultado in resultados:
