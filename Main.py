@@ -38,7 +38,7 @@ def CalculoDeCPYTEPorBases(valor : float, iteracion : int, presicionMayor, presi
 
 
 def Main():
-    valor = valorPrueba * 15
+    valor = valorPrueba * 1
     UnidadDeMaquicaSegunBases(basesUsadas, precisionesUsadas)
     iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo)
     ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)

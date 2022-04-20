@@ -18,4 +18,4 @@ def CalcularTEExperimental(serieIterable, valor : float, iteracion : int, precis
     valorMenor = serieIterable(valor, iteracion, precisionMenor)
     unidad = UnidadDeMaquina(base, precisionMenor)
 
-    return abs(valorMayor - valorMenor) / ((0.5 * (10 ** -unidad)) * abs(valorMayor))
+    return abs(valorMayor - valorMenor) / ((0.5 * (base ** -unidad)) * abs(valorMayor))
