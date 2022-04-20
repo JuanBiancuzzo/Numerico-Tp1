@@ -14,16 +14,15 @@ def UnidadDeMaquicaSegunBases(bases):
 def Main():
     UnidadDeMaquicaSegunBases([2, 10])
 
-    '''valorPrueba = 1
+    valorPrueba = (106005 + 105859) / (10 ** 6)
     resultados = []
     for iteracion in range(20):
         resultado = FuncionSerie(valorPrueba, iteracion)
         resultados.append(resultado)
     
-    resultadosNP = numpy.array(resultados)
     for resultado in resultados:
         print(resultado)
-    print(resultadosNP)'''
+    
 
 if __name__ == "__main__":
     Main()
