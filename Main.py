@@ -1,12 +1,10 @@
 from UnidadDeMaquina import UnidadDeMaquina
-from Serie import FuncionSerie
+from Serie import FuncionSerie, CantidadIteraciones
+from CalculoExperimentales import CaclularCPExperimental, CalcularTEExperimental
 import numpy
 
-padron1 = 105859
-padron2 = 106005
-divisor = 10 ** 6
-
-valorPrueba = (padron1 + padron2) / divisor
+valorPrueba = (105859 + 106005) / 10 ** 6
+errorMinimo = 10 ** (-14)
 precisionesUsadas = [numpy.float32, numpy.float64]
 
 def UnidadDeMaquicaSegunBases(bases, precisiones):
@@ -15,7 +13,7 @@ def UnidadDeMaquicaSegunBases(bases, precisiones):
 
         for precision in precisiones:
             unidad = UnidadDeMaquina(base, precision)
-            print(f"\tCon precision {precision.__name__}: {unidad}")
+            print(f"\tCon precision {precision.__name__}: {unidad}")#__N__ para que no apresca el nombre de la clase(+ bonito)
         
         print()
 
@@ -26,9 +24,14 @@ def ResultadosSegunPrecisiones(valor : float, iteracion : int, precisiones):
         print("{0:.55f}\n".format(numpy.float64(resultado)))
 
 def Main():
+    valor = valorPrueba * 15
     UnidadDeMaquicaSegunBases([2, 10], precisionesUsadas)
-    iteracionesNecesarias = 10 # hacer el calculo de iteraciones
-    ResultadosSegunPrecisiones(valorPrueba, iteracionesNecesarias, precisionesUsadas)    
+    iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo)
+    ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
+
+    cp = CaclularCPExperimental(FuncionSerie, valor, iteracionesNecesarias, numpy.float64)
+    te = CalcularTEExperimental(FuncionSerie, valor, iteracionesNecesarias, numpy.float32, numpy.float64, 10)
+    print(f"cp: {cp}, te: {te}")
 
 if __name__ == "__main__":
     Main()

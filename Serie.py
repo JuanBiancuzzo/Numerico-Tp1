@@ -9,15 +9,11 @@ def FuncionSerie(valor : float, iteraciones : int, precision) -> float:
         resultado += precision( dividendo / divisor)
     return precision(resultado)
 
-def CaclularCPExperimental(serieIterable, valor : float, iteraciones : int, precision) -> float:    
-    deltaValor = 0.1
-    valorIteracion = serieIterable(valor, iteraciones, precision)
-    calculoCP = lambda delta : abs(serieIterable(valor * (1 + delta), iteraciones, precision) - valorIteracion) / (abs(valorIteracion) * abs(delta))
-
-    CPInicial = calculoCP(deltaValor)
-    CPSiguiente = calculoCP(deltaValor / 10)
-    while CPInicial > CPSiguiente:
-        CPInicial = CPSiguiente
-        CPSiguiente = calculoCP(deltaValor / 10)
+def CantidadIteraciones(valor : float, errorMinimo : float) -> int: 
     
-    return CPInicial
+    aceptacionIteracion = lambda n : (valor ** (2 * n + 1)) < (errorMinimo * ((n + 1) ** n) * (2 * n + 1))   
+    iteracion = 1
+    while not aceptacionIteracion(iteracion):
+        iteracion += 1
+    
+    return iteracion
