@@ -1,3 +1,4 @@
+
 def UnidadDeMaquina(base : int, precision) -> int:
     division = 1
     valor = 1 + division
@@ -9,4 +10,3 @@ def UnidadDeMaquina(base : int, precision) -> int:
         unidad += 1
 
     return unidad
-
