@@ -13,7 +13,7 @@ def UnidadDeMaquicaSegunBases(bases, precisiones):
 
         for precision in precisiones:
             unidad = UnidadDeMaquina(base, precision)
-            print(f"\tCon precision {precision.__name__}: {unidad}")
+            print(f"\tCon precision {precision.__name__}: {unidad}")#__N__ para que no apresca el nombre de la clase(+ bonito)
         
         print()
 
