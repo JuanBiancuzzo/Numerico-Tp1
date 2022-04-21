@@ -1,15 +1,27 @@
 from UnidadDeMaquina import UnidadDeMaquina
 
-def CaclularCPExperimental(serieIterable, valor : float, iteraciones : int, precision) -> float:    
-    deltaValor = 0.1
+def CPExperimentalSegunDeltaX(serieIterable, valor : float, iteraciones : int, precision, deltaX : float) -> float:
     valorIteracion = serieIterable(valor, iteraciones, precision)
-    calculoCP = lambda delta : abs(serieIterable(valor * (1 + delta), iteraciones, precision) - valorIteracion) / (abs(valorIteracion) * abs(delta))
+    valorCorrida = serieIterable(valor + deltaX, iteraciones, precision)
+
+    return ((abs(valorCorrida - valorIteracion) * abs(valor)) / (abs(valorIteracion) * abs(deltaX)))    
+
+def CaclularCPExperimental(serieIterable, valor : float, iteraciones : int, precision) -> float:    
+    deltaValor = 3
+    decrecimiento = 0.01
+
+    calculoCP = lambda delta : CPExperimentalSegunDeltaX(serieIterable, valor, iteraciones, precision, delta)
 
     CPInicial = calculoCP(deltaValor)
-    CPSiguiente = calculoCP(deltaValor / 10)
+    
+    deltaValor -= decrecimiento
+    CPSiguiente = calculoCP(deltaValor)
+
     while CPInicial > CPSiguiente:
         CPInicial = CPSiguiente
-        CPSiguiente = calculoCP(deltaValor / 10)
+
+        deltaValor -= decrecimiento
+        CPSiguiente = calculoCP(deltaValor)
     
     return CPInicial
 
