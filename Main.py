@@ -3,6 +3,7 @@ from numpy import float32, float64
 from UnidadDeMaquina import UnidadDeMaquina
 from Serie import FuncionSerie, CantidadIteraciones
 from CalculoExperimentales import CalcularCPExperimental, CalcularTEExperimental
+from ErrorTotal import ErrorTotal
 from Plots import MostrarTableDeValoresDeIteracion, MotrarTablaDeCacluloDeCP, MostrarTablaDeValoresDeFuncion
 
 valorPrueba = (105859 + 106005) / 10 ** 6
@@ -45,6 +46,13 @@ def CalculoDeCPYTEPorBases(valor : float, iteracion : int, presicionMayor, presi
         te = CalcularTEExperimental(FuncionSerie, valor, iteracion, presicionMayor, presicionMenor, base)
         print(f"\tEl termino de estabilidad: {te}")
 
+def MostrarCalculoErrorTotal(valor , errorInherente, iteracion, bases):
+    for base in bases:
+        print(f"Con base {base}")
+        print(f"\t El error inherente relativo es : {errorInherente} ")
+        error = ErrorTotal(FuncionSerie, valor, iteracion, float64, float32, base, errorMinimo, errorInherente)
+        print(f"\t El error total es : {error}\n")
+
 def Main():
     valor = valorPrueba * 1
     UnidadDeMaquicaSegunBasesYPrecisiones(basesUsadas, precisionesUsadas)
@@ -52,10 +60,11 @@ def Main():
     iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo, precisionDeCalculo)
     ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
     CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, float64, float32, basesUsadas)  
-
-    MotrarTablaDeCacluloDeCP(FuncionSerie, valor, iteracionesNecesarias, precisionDeCalculo)
-    MostrarTableDeValoresDeIteracion(valor, errorMinimo, precisionDeCalculo)
-    MostrarTablaDeValoresDeFuncion(FuncionSerie, valor, 7, precisionDeCalculo)
+    MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)      #item c
+    MostrarCalculoErrorTotal(valor, 0.01, iteracionesNecesarias, basesUsadas)   #item d
+    #MotrarTablaDeCacluloDeCP(FuncionSerie, valor, iteracionesNecesarias, precisionDeCalculo)
+    #MostrarTableDeValoresDeIteracion(valor, errorMinimo, precisionDeCalculo)
+    #MostrarTablaDeValoresDeFuncion(FuncionSerie, valor, 7, precisionDeCalculo)
 
 if __name__ == "__main__":
     Main()
