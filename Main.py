@@ -55,7 +55,7 @@ def Main():
 
     MotrarTablaDeCacluloDeCP(FuncionSerie, valor, iteracionesNecesarias, precisionDeCalculo)
     MostrarTableDeValoresDeIteracion(valor, errorMinimo, precisionDeCalculo)
-    MostrarTablaDeValoresDeFuncion(FuncionSerie, valor, 20, precisionDeCalculo)
+    MostrarTablaDeValoresDeFuncion(FuncionSerie, valor, 7, precisionDeCalculo)
 
 if __name__ == "__main__":
     Main()

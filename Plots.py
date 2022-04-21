@@ -46,10 +46,13 @@ def MotrarTablaDeCacluloDeCP(serieIterable, valor : float, iteraciones : int, pr
 # por ahora no pude hacer el plot bien
 def MostrarTablaDeValoresDeFuncion(serieIterable, valor : float, iteraciones : int, precision):
     resultados = []
-    rango = range(2, iteraciones)
+    rango = range(0, iteraciones)
     for i in rango:
         resultado = serieIterable(valor, i, precision)
         resultados.append(resultado)
+
+    for resultado in resultados:
+        print(resultado)
 
     pyplot.title("Valores de la serie") 
     pyplot.xlabel("Numero de iteraciones") 
