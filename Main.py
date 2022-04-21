@@ -2,7 +2,7 @@ from numpy import float32, float64
 
 from UnidadDeMaquina import UnidadDeMaquina
 from Serie import FuncionSerie, CantidadIteraciones
-from CalculoExperimentales import CaclularCPExperimental, CalcularTEExperimental
+from CalculoExperimentales import CalcularCPExperimental, CalcularTEExperimental
 from Plots import MostrarTableDeValoresDeIteracion, MotrarTablaDeCacluloDeCP, MostrarTablaDeValoresDeFuncion
 
 valorPrueba = (105859 + 106005) / 10 ** 6
@@ -36,7 +36,7 @@ def CalculoDeCPYTEPorBases(valor : float, iteracion : int, presicionMayor, presi
     for precision in [presicionMayor, presicionMenor]:
         print(f"Con la precision {precision.__name__}:")        
 
-        cp = CaclularCPExperimental(FuncionSerie, valor, iteracion, precision)
+        cp = CalcularCPExperimental(FuncionSerie, valor, iteracion, precision)
         print(f"\tLa Condicion del problema: {cp}")
     
     # el calculo experimental del te es |y_d - y_s|/ mu_s |y_d|
