@@ -1,7 +1,9 @@
+import numpy
+
 from UnidadDeMaquina import UnidadDeMaquina
 from Serie import FuncionSerie, CantidadIteraciones
 from CalculoExperimentales import CaclularCPExperimental, CalcularTEExperimental
-import numpy
+from Plots import MostrarTableDeValoresDeIteracion
 
 valorPrueba = (105859 + 106005) / 10 ** 6
 errorMinimo = 10 ** (-14)
@@ -40,6 +42,9 @@ def CalculoDeCPYTEPorBases(valor : float, iteracion : int, presicionMayor, presi
 def Main():
     valor = valorPrueba * 1
     UnidadDeMaquicaSegunBases(basesUsadas, precisionesUsadas)
+
+    MostrarTableDeValoresDeIteracion(valor, errorMinimo)
+
     iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo)
     ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
     CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, numpy.float64, numpy.float32, basesUsadas)    

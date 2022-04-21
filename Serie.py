@@ -9,11 +9,14 @@ def FuncionSerie(valor : float, iteraciones : int, precision) -> float:
         resultado += precision( dividendo / divisor)
     return precision(resultado)
 
+def ErrorEnIteraccion(valor : float, n : int) -> float:
+    return (valor ** (2 * n + 1)) / (((n + 1) ** n) * (2 * n + 1))
+
+
 def CantidadIteraciones(valor : float, errorMinimo : float) -> int: 
-    
-    aceptacionIteracion = lambda n : (valor ** (2 * n + 1)) < (errorMinimo * ((n + 1) ** n) * (2 * n + 1))   
+
     iteracion = 1
-    while not aceptacionIteracion(iteracion):
+    while ErrorEnIteraccion(valor, iteracion) > errorMinimo:
         iteracion += 1
     
     return iteracion
