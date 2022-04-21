@@ -7,8 +7,8 @@ from Serie import CotaDeErrorEnIteraccion
 iteracionMasBaja = 1
 iteracionMasAlta = 10
 
-deltaMasBajo = 1
-deltaMasAlto = 3
+deltaMasBajo = -1
+deltaMasAlto = 2
 deltaSalto = 10 ** (-3)
 
 def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precision):
@@ -55,4 +55,5 @@ def MostrarTablaDeValoresDeFuncion(serieIterable, valor : float, iteraciones : i
     pyplot.xlabel("Numero de iteraciones") 
     pyplot.ylabel("Valor de la serie") 
     pyplot.plot(rango, resultados)
+    pyplot.grid(True)
     pyplot.show()

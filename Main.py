@@ -11,29 +11,35 @@ precisionesUsadas = [float32, float64]
 precisionDeCalculo = float64
 basesUsadas = [2, 10]
 
-def UnidadDeMaquicaSegunBases(bases, precisiones):
+# iteracion para las bases y precisiones
+def UnidadDeMaquicaSegunBasesYPrecisiones(bases, precisiones):
     for base in bases:
         print(f"Con la base {base}, tenemos las unidades de maquina: ")
 
         for precision in precisiones:
             unidad = UnidadDeMaquina(base, precision)
-            print(f"\tCon precision {precision.__name__}: {unidad}")#__N__ para que no apresca el nombre de la clase(+ bonito)
+            #__name__ para que no apresca el nombre de la clase(+ bonito)
+            print(f"\tCon precision {precision.__name__}: {unidad}")
         
         print()
 
+# imprime los resultados de la serie segun la precision (32 o 64 bits en los floats)
 def ResultadosSegunPrecisiones(valor : float, iteracion : int, precisiones):
     for precision in precisiones:
         print(f"Con una cantidad de iteraciones {iteracion}\n\tSe logra la precision: ", end = "")
         resultado = FuncionSerie(valor, iteracion, precision)
         print("{0:.55f}\n".format(float64(resultado)))
 
+
 def CalculoDeCPYTEPorBases(valor : float, iteracion : int, presicionMayor, presicionMenor, bases):
+    # El calculo del cp solo varia segun la precision
     for precision in [presicionMayor, presicionMenor]:
         print(f"Con la precision {precision.__name__}:")        
 
         cp = CaclularCPExperimental(FuncionSerie, valor, iteracion, precision)
         print(f"\tLa Condicion del problema: {cp}")
     
+    # el calculo experimental del te es |y_d - y_s|/ mu_s |y_d|
     for base in bases:
         print(f"Con la base {base}: ")
         te = CalcularTEExperimental(FuncionSerie, valor, iteracion, presicionMayor, presicionMenor, base)
@@ -41,16 +47,15 @@ def CalculoDeCPYTEPorBases(valor : float, iteracion : int, presicionMayor, presi
 
 def Main():
     valor = valorPrueba * 1
-    UnidadDeMaquicaSegunBases(basesUsadas, precisionesUsadas)
+    UnidadDeMaquicaSegunBasesYPrecisiones(basesUsadas, precisionesUsadas)
 
     iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo, precisionDeCalculo)
     ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
     CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, float64, float32, basesUsadas)  
 
-    #MostrarTablaDeValoresDeFuncion(FuncionSerie, valor, 20, precisionDeCalculo)
-    for i in range (2, 7):
-        MotrarTablaDeCacluloDeCP(FuncionSerie, valor, i, precisionDeCalculo)
+    MotrarTablaDeCacluloDeCP(FuncionSerie, valor, iteracionesNecesarias, precisionDeCalculo)
     MostrarTableDeValoresDeIteracion(valor, errorMinimo, precisionDeCalculo)
+    MostrarTablaDeValoresDeFuncion(FuncionSerie, valor, 20, precisionDeCalculo)
 
 if __name__ == "__main__":
     Main()
