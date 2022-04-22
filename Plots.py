@@ -30,9 +30,9 @@ def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precisi
     pyplot.show()
 
 def MotrarTablaDeCacluloDeCP(serieIterable, valor : float, iteraciones : int, precision):
-    deltaMasBajo = 10**-10
-    deltaMasAlto = 10**-9
-    deltaSalto = 10 ** (-11)
+    deltaMasBajo = 10**-14
+    deltaMasAlto = 10**-6
+    deltaSalto = 10 ** (-8)
     resultados = []
     rango = arange(deltaMasBajo, deltaMasAlto, deltaSalto)
     for i in rango:
@@ -63,7 +63,7 @@ def MostrarTablaDeValoresDeFuncion(serieIterable, valor : float, iteraciones : i
 
 def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, precisionMayor, precisionMenor, base, errorTruncamiento):
     resultados = []
-    rango = arange(0, 0.1, 0.001)
+    rango = arange(0, 0.001, 0.00001)
 
     cp = CalcularCPExperimental(serieIterable, valor, iteraciones, precisionMayor)
     te = CalcularTEExperimental(serieIterable, valor, iteraciones, precisionMayor, precisionMenor, base)
@@ -88,10 +88,11 @@ def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, pr
 
 def main():
 
-    MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
+    #MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
 
     iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
-    MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
+    #MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
+    MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
 
 if __name__ == "__main__":
     main()

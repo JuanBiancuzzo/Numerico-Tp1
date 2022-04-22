@@ -66,7 +66,7 @@ def Main():
         ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
         CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, float64, float32, basesUsadas)  
         MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)      #item c
-        MostrarCalculoErrorTotal(valor, 0.01, iteracionesNecesarias, basesUsadas)   #item d
+        MostrarCalculoErrorTotal(valor, 0.0001, iteracionesNecesarias, basesUsadas)   #item d
 
         
 
