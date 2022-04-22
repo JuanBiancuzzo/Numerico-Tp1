@@ -5,7 +5,7 @@ from UnidadDeMaquina import UnidadDeMaquina
 from Serie import FuncionSerie, CantidadIteraciones
 from CalculoExperimentales import CalcularCPExperimental, CalcularTEExperimental
 from ErrorTotal import ErrorTotal
-from Plots import MostrarTableDeValoresDeIteracion, MotrarTablaDeCacluloDeCP, MostrarTablaDeValoresDeFuncion
+
 
 valorPrueba = (105859 + 106005) / 10 ** 6
 errorMinimo = 10 ** (-14)
@@ -68,8 +68,7 @@ def Main():
         MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)      #item c
         MostrarCalculoErrorTotal(valor, 0.01, iteracionesNecesarias, basesUsadas)   #item d
 
-        MotrarTablaDeCacluloDeCP(FuncionSerie, valor, iteracionesNecesarias, precisionDeCalculo)
-    
+        
 
 if __name__ == "__main__":
     Main()

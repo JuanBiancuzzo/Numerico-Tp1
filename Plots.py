@@ -1,5 +1,7 @@
 from matplotlib import pyplot
 from numpy import arange, float32, float64
+from CalculoExperimentales import CalcularCPExperimental, CalcularTEExperimental
+from UnidadDeMaquina import UnidadDeMaquina
 
 from CalculoExperimentales import CPExperimentalSegunDeltaX
 from Serie import CotaDeErrorEnIteraccion
@@ -7,14 +9,9 @@ from ErrorTotal import ErrorTotal, CalculoDeError
 from Main import valorPrueba, errorMinimo, precisionDeCalculo, baseDeCalculo
 from Serie import FuncionSerie, CantidadIteraciones
 
-iteracionMasBaja = 1
-iteracionMasAlta = 10
-
-deltaMasBajo = 10**-10
-deltaMasAlto = 10**-9
-deltaSalto = 10 ** (-11)
-
 def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precision):
+    iteracionMasBaja = 1
+    iteracionMasAlta = 10
     resultados = []
     rango = range(iteracionMasBaja, iteracionMasAlta + 1)
     for i in rango:
@@ -33,6 +30,9 @@ def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precisi
     pyplot.show()
 
 def MotrarTablaDeCacluloDeCP(serieIterable, valor : float, iteraciones : int, precision):
+    deltaMasBajo = 10**-10
+    deltaMasAlto = 10**-9
+    deltaSalto = 10 ** (-11)
     resultados = []
     rango = arange(deltaMasBajo, deltaMasAlto, deltaSalto)
     for i in rango:
@@ -65,16 +65,19 @@ def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, pr
     resultados = []
     rango = arange(0, 0.1, 0.001)
 
-    cp = CalcularCPExperimental(serieIterable, valor, iteracion, precisionMayor)
-    te = CalcularTEExperimental(serieIterable, valor, iteracion, precisionMayor, precisionMenor, base)
+    cp = CalcularCPExperimental(serieIterable, valor, iteraciones, precisionMayor)
+    te = CalcularTEExperimental(serieIterable, valor, iteraciones, precisionMayor, precisionMenor, base)
     
     unidad = UnidadDeMaquina(base, precisionMayor)
     mu = 0.5* (base**-unidad)
 
     for i in rango:
-        resultado = CalculoDeError(cp, te, mu, errorInherente, i)
+        resultado = CalculoDeError(cp, te, mu, i, errorTruncamiento)
         resultados.append(resultado)
 
+    fig = pyplot.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.set_yscale('log')
     pyplot.title("Error total variando el error inherente") 
     pyplot.xlabel("Error inherente") 
     pyplot.ylabel("Error total") 
