@@ -31,14 +31,13 @@ def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precisi
     pyplot.show()
 
 def MotrarTablaDeCacluloDeCP(serieIterable, valor : float, iteraciones : int, precision):
-    deltaMasBajo = 10**-13
-    deltaMasAlto = 10**-1
-    
-    resultados = []
-    rango = [deltaMasAlto]
-    for i in range(13):
-        rango.append(rango[i]/10)
+    deltaMasAlto = 10**-7
 
+    rango = [deltaMasAlto]
+    for i in range(50):
+        rango.append(rango[i] / 1.2)
+
+    resultados = []
     for i in rango:
         resultado = CPExperimentalSegunDeltaX(serieIterable, valor, iteraciones, precision, i)
         resultados.append(resultado)
