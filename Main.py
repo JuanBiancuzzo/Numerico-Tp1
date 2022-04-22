@@ -12,6 +12,7 @@ errorMinimo = 10 ** (-14)
 precisionesUsadas = [float32, float64]
 precisionDeCalculo = float64
 basesUsadas = [2, 10]
+baseDeCalculo = 10
 
 # iteracion para las bases y precisiones
 def UnidadDeMaquicaSegunBasesYPrecisiones(bases, precisiones):

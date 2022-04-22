@@ -1,9 +1,11 @@
 from matplotlib import pyplot
-from numpy import arange, exp, log
+from numpy import arange, float32, float64
 
 from CalculoExperimentales import CPExperimentalSegunDeltaX
 from Serie import CotaDeErrorEnIteraccion
-from ErrorTotal import ErrorTotal
+from ErrorTotal import ErrorTotal, CalculoDeError
+from Main import valorPrueba, errorMinimo, precisionDeCalculo, baseDeCalculo
+from Serie import FuncionSerie, CantidadIteraciones
 
 iteracionMasBaja = 1
 iteracionMasAlta = 10
@@ -52,9 +54,6 @@ def MostrarTablaDeValoresDeFuncion(serieIterable, valor : float, iteraciones : i
         resultado = serieIterable(valor, i, precision)
         resultados.append(resultado)
 
-    for resultado in resultados:
-        print(resultado)
-
     pyplot.title("Valores de la serie") 
     pyplot.xlabel("Numero de iteraciones") 
     pyplot.ylabel("Valor de la serie") 
@@ -62,5 +61,31 @@ def MostrarTablaDeValoresDeFuncion(serieIterable, valor : float, iteraciones : i
     pyplot.grid(True)
     pyplot.show()
 
-def MostrarTablaDeErrorTotal():
-    pass
+def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, precisionMayor, precisionMenor, base, errorTruncamiento):
+    resultados = []
+    rango = arange(0, 0.1, 0.001)
+
+    cp = CalcularCPExperimental(serieIterable, valor, iteracion, precisionMayor)
+    te = CalcularTEExperimental(serieIterable, valor, iteracion, precisionMayor, precisionMenor, base)
+    
+    unidad = UnidadDeMaquina(base, precisionMayor)
+    mu = 0.5* (base**-unidad)
+
+    for i in rango:
+        resultado = CalculoDeError(cp, te, mu, errorInherente, i)
+        resultados.append(resultado)
+
+    pyplot.title("Error total variando el error inherente") 
+    pyplot.xlabel("Error inherente") 
+    pyplot.ylabel("Error total") 
+    pyplot.plot(rango, resultados)
+    pyplot.grid(True)
+    pyplot.show()
+    
+
+def main():
+    iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
+    MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
+
+if __name__ == "__main__":
+    main()
