@@ -7,8 +7,8 @@ def CPExperimentalSegunDeltaX(serieIterable, valor : float, iteraciones : int, p
     return ((abs(valorCorrida - valorIteracion) * abs(valor)) / (abs(valorIteracion) * abs(deltaX)))    
 
 def CalcularCPExperimental(serieIterable, valor : float, iteraciones : int, precision) -> float:    
-    deltaValor = 3 # un numero suficientemente a la derecha del valor del cp
-    decrecimiento = 0.01
+    deltaValor = 10 ** -13 # un numero suficientemente a la derecha del valor del cp
+    decrecimiento = 10 ** -14
 
     calculoCP = lambda delta : CPExperimentalSegunDeltaX(serieIterable, valor, iteraciones, precision, delta)
 

@@ -1,5 +1,6 @@
 from matplotlib import pyplot
-from numpy import arange, float32, float64
+from numpy import arange, concatenate
+
 from CalculoExperimentales import CalcularCPExperimental, CalcularTEExperimental
 from UnidadDeMaquina import UnidadDeMaquina
 
@@ -30,9 +31,9 @@ def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precisi
     pyplot.show()
 
 def MotrarTablaDeCacluloDeCP(serieIterable, valor : float, iteraciones : int, precision):
-    deltaMasBajo = 10**-14
-    deltaMasAlto = 10**-6
-    deltaSalto = 10 ** (-8)
+    deltaMasBajo = 10**-13
+    deltaMasAlto = 10**-11
+    deltaSalto = 10 ** (-13)
     resultados = []
     rango = arange(deltaMasBajo, deltaMasAlto, deltaSalto)
     for i in rango:
@@ -107,10 +108,10 @@ def MostrarTablaDeCantidadIteracionesSegunValor():
 def main():
 
     #MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
-    MostrarTablaDeCantidadIteracionesSegunValor()
-    #iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
+   # MostrarTablaDeCantidadIteracionesSegunValor()
+    iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
     #MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
-    #MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
+    MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
 
 if __name__ == "__main__":
     main()

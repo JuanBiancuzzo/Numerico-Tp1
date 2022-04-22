@@ -1,10 +1,16 @@
-from scipy.special import factorial
+
+def FuncionFactorial(valor:int, precision)->float:
+    resultado = 1
+    for i in range(1,valor):
+        resultado = precision(resultado * i)
+
+    return precision(resultado)
 
 # la variable iteracion seria la "k" en la serie
 def ValorEnIteracion(valor : float, iteracion : int, precision) -> float:
     signo = (-1) ** iteracion
     dividendo = precision( signo * ( valor ** ( 2 * iteracion + 1 ) ) )
-    divisor = precision( ( 2 ** iteracion ) * factorial(iteracion) * ( 2 * iteracion + 1 ) )
+    divisor = precision( ( 2 ** iteracion ) * FuncionFactorial(iteracion,precision) * ( 2 * iteracion + 1 ) )
 
     return precision( dividendo / divisor )
 
