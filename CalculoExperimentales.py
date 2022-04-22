@@ -2,9 +2,9 @@ from UnidadDeMaquina import UnidadDeMaquina
 
 def CPExperimentalSegunDeltaX(serieIterable, valor : float, iteraciones : int, precision, deltaX : float) -> float:
     valorIteracion = serieIterable(valor, iteraciones, precision)
-    valorCorrida = serieIterable(valor + deltaX, iteraciones, precision)
+    valorCorrida = serieIterable(valor * (1 + deltaX), iteraciones, precision)
 
-    return ((abs(valorCorrida - valorIteracion) * abs(valor)) / (abs(valorIteracion) * abs(deltaX)))    
+    return abs(valorCorrida - valorIteracion) / (abs(valorIteracion) * abs(deltaX))
 
 def CalcularCPExperimental(serieIterable, valor : float, iteraciones : int, precision) -> float:    
     deltaValor = 10 ** -13 # un numero suficientemente a la derecha del valor del cp
