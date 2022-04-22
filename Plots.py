@@ -24,7 +24,7 @@ def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precisi
     pyplot.axhline(y=errorMinimo, color='r', linestyle='-')
     pyplot.title("Calculo de cantidad de iteraciones analitico") 
     pyplot.xlabel("Cantidad de iteraciones") 
-    pyplot.ylabel("Valor por iteracion") 
+    pyplot.ylabel("Valor de la cota de error") 
     pyplot.plot(rango, resultados)
     pyplot.grid(True)
     pyplot.show()
@@ -84,15 +84,33 @@ def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, pr
     pyplot.plot(rango, resultados)
     pyplot.grid(True)
     pyplot.show()
-    
+
+def MostrarTablaDeCantidadIteracionesSegunValor():
+    resultados = []
+    valorMinimo = 10 ** -4
+    valorMaximo = 5
+    valorSalto = 10 ** -2
+    rango = arange(valorMinimo, valorMaximo, valorSalto)
+    for i in rango:
+        resultado = CantidadIteraciones(i, errorMinimo, precisionDeCalculo)  
+        resultados.append(resultado)
+
+    pyplot.axvline(x=valorPrueba, color='r', linestyle='-')
+    pyplot.axvline(x=valorPrueba * 15, color='g', linestyle='-')
+    pyplot.title("Calculo de cantidad de iteraciones dependiendo el valor") 
+    pyplot.xlabel("Valor de x en la serie") 
+    pyplot.ylabel("Cantidad de iteraciones") 
+    pyplot.plot(rango, resultados)
+    pyplot.grid(True)
+    pyplot.show()  
 
 def main():
 
     #MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
-
-    iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
+    MostrarTablaDeCantidadIteracionesSegunValor()
+    #iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
     #MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
-    MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
+    #MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
 
 if __name__ == "__main__":
     main()
