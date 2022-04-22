@@ -87,6 +87,9 @@ def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, pr
     
 
 def main():
+
+    MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
+
     iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
     MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
 
