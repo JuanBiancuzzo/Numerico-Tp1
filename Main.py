@@ -1,3 +1,4 @@
+from distutils.log import error
 from numpy import float32, float64
 
 from UnidadDeMaquina import UnidadDeMaquina
@@ -34,7 +35,7 @@ def ResultadosSegunPrecisiones(valor : float, iteracion : int, precisiones):
 
 def CalculoDeCPYTEPorBases(valor : float, iteracion : int, presicionMayor, presicionMenor, bases):
     # El calculo del cp solo varia segun la precision
-    for precision in [presicionMayor, presicionMenor]:
+    for precision in [presicionMayor]:
         print(f"Con la precision {precision.__name__}:")        
 
         cp = CalcularCPExperimental(FuncionSerie, valor, iteracion, precision)
@@ -54,17 +55,20 @@ def MostrarCalculoErrorTotal(valor , errorInherente, iteracion, bases):
         print(f"\t El error total es : {error}\n")
 
 def Main():
-    valor = valorPrueba * 1
-    UnidadDeMaquicaSegunBasesYPrecisiones(basesUsadas, precisionesUsadas)
+    for valor in [valorPrueba, valorPrueba * 15]:
+        
+        print(f"Con valor: {valor}")
 
-    iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo, precisionDeCalculo)
-    ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
-    CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, float64, float32, basesUsadas)  
-    MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)      #item c
-    MostrarCalculoErrorTotal(valor, 0.01, iteracionesNecesarias, basesUsadas)   #item d
-    #MotrarTablaDeCacluloDeCP(FuncionSerie, valor, iteracionesNecesarias, precisionDeCalculo)
-    #MostrarTableDeValoresDeIteracion(valor, errorMinimo, precisionDeCalculo)
-    #MostrarTablaDeValoresDeFuncion(FuncionSerie, valor, 7, precisionDeCalculo)
+        UnidadDeMaquicaSegunBasesYPrecisiones(basesUsadas, precisionesUsadas)
+
+        iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo, precisionDeCalculo)
+        ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
+        CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, float64, float32, basesUsadas)  
+        MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)      #item c
+        MostrarCalculoErrorTotal(valor, 0.01, iteracionesNecesarias, basesUsadas)   #item d
+
+        MotrarTablaDeCacluloDeCP(FuncionSerie, valor, iteracionesNecesarias, precisionDeCalculo)
+    
 
 if __name__ == "__main__":
     Main()

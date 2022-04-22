@@ -3,13 +3,14 @@ from numpy import arange, exp, log
 
 from CalculoExperimentales import CPExperimentalSegunDeltaX
 from Serie import CotaDeErrorEnIteraccion
+from ErrorTotal import ErrorTotal
 
 iteracionMasBaja = 1
 iteracionMasAlta = 10
 
-deltaMasBajo = -1
-deltaMasAlto = 2
-deltaSalto = 10 ** (-3)
+deltaMasBajo = 10**-10
+deltaMasAlto = 10**-9
+deltaSalto = 10 ** (-11)
 
 def MostrarTableDeValoresDeIteracion(valor : float, errorMinimo : float, precision):
     resultados = []
@@ -60,3 +61,6 @@ def MostrarTablaDeValoresDeFuncion(serieIterable, valor : float, iteraciones : i
     pyplot.plot(rango, resultados)
     pyplot.grid(True)
     pyplot.show()
+
+def MostrarTablaDeErrorTotal():
+    pass
