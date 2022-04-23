@@ -146,9 +146,9 @@ def MostrarTablaDeCacluloDeTE(serieIterable, valor : float, iteraciones : int, p
 
     pyplot.axvline(x=valorPrueba, color='r', linestyle='-')
     pyplot.axvline(x=valorPrueba * 15, color='r', linestyle='-')
-    pyplot.title("Error total variando el error inherente") 
-    pyplot.xlabel("Error inherente") 
-    pyplot.ylabel("Error total") 
+    pyplot.title("Calculo del TE") 
+    pyplot.xlabel("Valores de X") 
+    pyplot.ylabel("Valores de TE") 
     pyplot.plot(rango, resultados)
     pyplot.grid(True)
     pyplot.show()
