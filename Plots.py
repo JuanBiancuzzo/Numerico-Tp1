@@ -140,8 +140,8 @@ def main():
 
     #MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
     #MostrarTablaDeCantidadIteracionesSegunValor()
-    #iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
-    #MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
+    iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
+    MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
     #MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
     MostrarTablaDeCantidadIteracionesMinimasSegunValor()
 
