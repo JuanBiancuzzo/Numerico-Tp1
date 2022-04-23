@@ -1,11 +1,11 @@
 from matplotlib import pyplot
-from numpy import arange, concatenate
+from numpy import arange, float32, float64
 
 from CalculoExperimentales import CalcularCPExperimental, CalcularTEExperimental
 from UnidadDeMaquina import UnidadDeMaquina
 
 from CalculoExperimentales import CPExperimentalSegunDeltaX
-from Serie import CotaDeErrorEnIteraccion
+from Serie import CotaDeErrorEnIteraccion, CantidadMinimaIteracciones
 from ErrorTotal import ErrorTotal, CalculoDeError
 from Main import valorPrueba, errorMinimo, precisionDeCalculo, baseDeCalculo
 from Serie import FuncionSerie, CantidadIteraciones
@@ -69,7 +69,7 @@ def MostrarTablaDeValoresDeFuncion(serieIterable, valor : float, iteraciones : i
 
 def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, precisionMayor, precisionMenor, base, errorTruncamiento):
     resultados = []
-    rango = arange(0, 0.001, 0.00001)
+    rango = arange(0, 0.01, 0.000001)
 
     cp = CalcularCPExperimental(serieIterable, valor, iteraciones, precisionMayor)
     te = CalcularTEExperimental(serieIterable, valor, iteraciones, precisionMayor, precisionMenor, base)
@@ -84,6 +84,9 @@ def MostrarTablaDeErrorTotal(serieIterable, valor : float, iteraciones : int, pr
     fig = pyplot.figure()
     ax = fig.add_subplot(1, 1, 1)
     ax.set_yscale('log')
+    ax.set_xscale('log')
+    pyplot.axvline(x=0, color='r', linestyle='-')
+    pyplot.axvline(x=0.01 / 100, color='r', linestyle='-')
     pyplot.title("Error total variando el error inherente") 
     pyplot.xlabel("Error inherente") 
     pyplot.ylabel("Error total") 
@@ -110,13 +113,37 @@ def MostrarTablaDeCantidadIteracionesSegunValor():
     pyplot.grid(True)
     pyplot.show()  
 
+def MostrarTablaDeCantidadIteracionesMinimasSegunValor():
+    resultados = []
+    valorMinimo = 0.1
+    rango = [valorMinimo]
+    for i in range(83):
+        rango.append(rango[i] * 1.05)
+
+    for i in rango:
+        resultado = CantidadMinimaIteracciones(i, precisionDeCalculo)  
+        resultados.append(resultado)
+
+    fig = pyplot.figure()
+    ax = fig.add_subplot(1, 1, 1)
+    ax.set_xscale('log')
+    pyplot.axvline(x=valorPrueba, color='r', linestyle='-')
+    pyplot.axvline(x=valorPrueba * 15, color='g', linestyle='-')
+    pyplot.title("Calculo de cantidad de iteraciones\n minima para cumplir el criterio de Leibniz") 
+    pyplot.xlabel("Valor de x en la serie") 
+    pyplot.ylabel("Cantidad de iteraciones minima") 
+    pyplot.plot(rango, resultados)
+    pyplot.grid(True)
+    pyplot.show()  
+
 def main():
 
     #MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
-   # MostrarTablaDeCantidadIteracionesSegunValor()
-    iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
+    #MostrarTablaDeCantidadIteracionesSegunValor()
+    #iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
     #MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
-    MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
+    #MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
+    MostrarTablaDeCantidadIteracionesMinimasSegunValor()
 
 if __name__ == "__main__":
     main()

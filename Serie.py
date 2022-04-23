@@ -27,8 +27,24 @@ def CotaDeErrorEnIteraccion(valor : float, n : int, precision) -> float:
 
 def CantidadIteraciones(valor : float, errorMinimo : float, precision) -> int: 
 
-    iteracion = 1
+    iteracion = 0
     while CotaDeErrorEnIteraccion(valor, iteracion, precision) > errorMinimo:
         iteracion += 1
     
+    return iteracion
+
+def CondicionMinima(valor : float, iteracion : int, precision) -> bool:
+    valorConNIteraciones = abs(ValorEnIteracion(valor, iteracion, precision))
+    valorConNMas1Iteraciones = abs(ValorEnIteracion(valor, iteracion + 1, precision))
+
+    #print(f"valor n: {valorConNIteraciones} y valor n+1: {valorConNMas1Iteraciones}")
+    return valorConNMas1Iteraciones < valorConNIteraciones
+
+def CantidadMinimaIteracciones(valor : float, precision) -> int:
+    
+    iteracion = 0
+
+    while not CondicionMinima(valor, iteracion, precision):
+        iteracion += 1
+
     return iteracion
