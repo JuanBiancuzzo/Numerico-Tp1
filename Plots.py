@@ -136,6 +136,23 @@ def MostrarTablaDeCantidadIteracionesMinimasSegunValor():
     pyplot.grid(True)
     pyplot.show()  
 
+def MostrarTablaDeCacluloDeTE(serieIterable, valor : float, iteraciones : int, precisionMayor, precisionMenor, base):
+    resultados = []
+    rango = arange(0.01, 5, 0.05)
+
+    for i in rango:
+        resultado = CalcularTEExperimental(serieIterable, i, iteraciones, precisionMayor, precisionMenor, base)
+        resultados.append(resultado)
+
+    pyplot.axvline(x=valorPrueba, color='r', linestyle='-')
+    pyplot.axvline(x=valorPrueba * 15, color='r', linestyle='-')
+    pyplot.title("Error total variando el error inherente") 
+    pyplot.xlabel("Error inherente") 
+    pyplot.ylabel("Error total") 
+    pyplot.plot(rango, resultados)
+    pyplot.grid(True)
+    pyplot.show()
+
 def main():
 
     #MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
@@ -143,7 +160,8 @@ def main():
     iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
     MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
     #MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
-    MostrarTablaDeCantidadIteracionesMinimasSegunValor()
+    #MostrarTablaDeCantidadIteracionesMinimasSegunValor()
+    MostrarTablaDeCacluloDeTE(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo)
 
 if __name__ == "__main__":
     main()
