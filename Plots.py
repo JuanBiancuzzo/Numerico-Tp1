@@ -155,12 +155,12 @@ def MostrarTablaDeCacluloDeTE(serieIterable, valor : float, iteraciones : int, p
 
 def main():
 
-    #MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
-    #MostrarTablaDeCantidadIteracionesSegunValor()
+    MostrarTableDeValoresDeIteracion(valorPrueba, errorMinimo, precisionDeCalculo)
+    MostrarTablaDeCantidadIteracionesSegunValor()
     iteracionesNecesarias = CantidadIteraciones(valorPrueba, errorMinimo, precisionDeCalculo)
     MostrarTablaDeErrorTotal(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo, errorMinimo)
-    #MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
-    #MostrarTablaDeCantidadIteracionesMinimasSegunValor()
+    MotrarTablaDeCacluloDeCP(FuncionSerie, valorPrueba, iteracionesNecesarias, precisionDeCalculo)
+    MostrarTablaDeCantidadIteracionesMinimasSegunValor()
     MostrarTablaDeCacluloDeTE(FuncionSerie, valorPrueba, iteracionesNecesarias, float64, float32, baseDeCalculo)
 
 if __name__ == "__main__":
