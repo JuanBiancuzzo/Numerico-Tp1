@@ -1,19 +1,17 @@
 from math import factorial
 
-def FuncionFactorial(valor:int, precision)->float:
+def FuncionFactorial(valor:int, precision) -> float:
     resultado = 1
-    for i in range(1,valor):
-        resultado = precision(resultado * i)
+    for i in range(valor):
+        resultado = precision( resultado * (i + 1) )
 
-    return resultado
+    return precision( resultado )
 
 # la variable iteracion seria la "k" en la serie
 def ValorEnIteracion(valor : float, iteracion : int, precision) -> float:
     signo = (-1) ** iteracion
     dividendo = precision( signo * ( valor ** ( 2 * iteracion + 1 ) ) )
     divisor = precision( ( 2 ** iteracion ) * FuncionFactorial(iteracion, precision) * ( 2 * iteracion + 1 ) )
-
-    print(f"divisor: {divisor}, dividendo: {dividendo}, resultado: {dividendo / divisor}")
 
     return precision( dividendo / divisor )
 
@@ -51,3 +49,12 @@ def CantidadMinimaIteracciones(valor : float, precision) -> int:
         iteracion += 1
 
     return iteracion
+
+from numpy import float64
+
+def main():
+    for n in range(10):
+        print(f"valor: {n} y da: {FuncionFactorial(n, float64)}")
+
+if __name__ == "__main__":
+    main()
