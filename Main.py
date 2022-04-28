@@ -6,7 +6,6 @@ from Serie import FuncionSerie, CantidadIteraciones
 from CalculoExperimentales import CalcularCPExperimental, CalcularTEExperimental
 from ErrorTotal import ErrorTotal
 
-
 valorPrueba = (105859 + 106005) / 10 ** 6
 errorMinimo = 10 ** (-14)
 precisionesUsadas = [float32, float64]
@@ -29,7 +28,7 @@ def UnidadDeMaquicaSegunBasesYPrecisiones(bases, precisiones):
 # imprime los resultados de la serie segun la precision (32 o 64 bits en los floats)
 def ResultadosSegunPrecisiones(valor : float, iteracion : int, precisiones):
     for precision in precisiones:
-        print(f"Con una cantidad de iteraciones {iteracion}\n\tSe logra la precision: ", end = "")
+        print(f"Con una cantidad de iteraciones {iteracion}\n\tSe logra con {precision.__name__} de precision: ", end = "")
         resultado = FuncionSerie(valor, iteracion, precision)
         print("{0:.55f}\n".format(float64(resultado)))
 
@@ -56,13 +55,15 @@ def MostrarCalculoErrorTotal(valor , errorInherente, iteracion, bases):
         print(f"\t El error total es : {error}\n")
 
 def Main():
+
+    UnidadDeMaquicaSegunBasesYPrecisiones(basesUsadas, precisionesUsadas)
+
     for valor in [valorPrueba, valorPrueba * 15]:
         
         print(f"Con valor: {valor}")
 
         iteracionesNecesarias = CantidadIteraciones(valor, errorMinimo, precisionDeCalculo)
         ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
-        UnidadDeMaquicaSegunBasesYPrecisiones(basesUsadas, precisionesUsadas)
 
         CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, float64, float32, basesUsadas)  
         MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)      #item c
