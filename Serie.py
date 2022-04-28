@@ -38,7 +38,6 @@ def CondicionMinima(valor : float, iteracion : int, precision) -> bool:
     valorConNIteraciones = abs(ValorEnIteracion(valor, iteracion, precision))
     valorConNMas1Iteraciones = abs(ValorEnIteracion(valor, iteracion + 1, precision))
 
-    #print(f"valor n: {valorConNIteraciones} y valor n+1: {valorConNMas1Iteraciones}")
     return valorConNMas1Iteraciones < valorConNIteraciones
 
 def CantidadMinimaIteracciones(valor : float, precision) -> int:
@@ -49,12 +48,3 @@ def CantidadMinimaIteracciones(valor : float, precision) -> int:
         iteracion += 1
 
     return iteracion
-
-from numpy import float64
-
-def main():
-    for n in range(10):
-        print(f"valor: {n} y da: {FuncionFactorial(n, float64)}")
-
-if __name__ == "__main__":
-    main()
