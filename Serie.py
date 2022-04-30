@@ -1,4 +1,3 @@
-from math import factorial
 
 def FuncionFactorial(valor:int, precision) -> float:
     resultado = 1

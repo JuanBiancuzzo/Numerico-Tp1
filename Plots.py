@@ -6,7 +6,7 @@ from UnidadDeMaquina import UnidadDeMaquina
 
 from CalculoExperimentales import CPExperimentalSegunDeltaX
 from Serie import CotaDeErrorEnIteraccion, CantidadMinimaIteracciones
-from ErrorTotal import ErrorTotal, CalculoDeError
+from ErrorTotal import CalculoDeError
 from Main import valorPrueba, errorMinimo, precisionDeCalculo, baseDeCalculo
 from Serie import FuncionSerie, CantidadIteraciones
 

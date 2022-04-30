@@ -1,4 +1,3 @@
-from distutils.log import error
 from numpy import float32, float64
 
 from UnidadDeMaquina import UnidadDeMaquina
@@ -8,10 +7,10 @@ from ErrorTotal import ErrorTotal
 
 valorPrueba = (105859 + 106005) / 10 ** 6
 errorMinimo = 10 ** (-14)
-precisionesUsadas = [float32, float64]
 precisionDeCalculo = float64
-basesUsadas = [2, 10]
+precisionesUsadas = [float32, float64]
 baseDeCalculo = 10
+basesUsadas = [2, 10]
 
 # iteracion para las bases y precisiones
 def UnidadDeMaquicaSegunBasesYPrecisiones(bases, precisiones):
@@ -66,9 +65,8 @@ def Main():
         ResultadosSegunPrecisiones(valor, iteracionesNecesarias, precisionesUsadas)
 
         CalculoDeCPYTEPorBases(valor, iteracionesNecesarias, float64, float32, basesUsadas)  
-        MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)      #item c
-        MostrarCalculoErrorTotal(valor, 0.0001, iteracionesNecesarias, basesUsadas)   #item d
-        
+        MostrarCalculoErrorTotal(valor, 0, iteracionesNecesarias, basesUsadas)  
+        MostrarCalculoErrorTotal(valor, 0.0001, iteracionesNecesarias, basesUsadas)
 
 if __name__ == "__main__":
     Main()
